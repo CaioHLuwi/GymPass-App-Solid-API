@@ -11,7 +11,7 @@ GymPass style app.
 - [ ] Should be possible the user get him check-ins history;
 - [ ] Should be possible the user get the nearby gyms;
 - [ ] Should be possible the user get the gyms by the name;
-- [ ] Should be possible the user do check-in in a gym;
+- [x] Should be possible the user do check-in in a gym;
 - [ ] Should be possible validate the user's check-in;
 - [ ] Should be possible register a gym;
 
