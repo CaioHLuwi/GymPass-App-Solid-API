@@ -1,32 +1,98 @@
-# App
+# GymPass Style App
 
-GymPass style app.
+## Aplicativo de gerenciamento de academias e check-ins inspirado no GymPass.
+Problem
 
-## RFs (Requisitos funcionais)
+Muitos usuários querem flexibilidade para treinar em diferentes academias e registrar sua presença de forma ágil e segura, sem depender de sistemas fragmentados e sem padronização.
+Solution
 
-- [x] Should be possible register yourself;
-- [x] Should be possible authenticate yourself;
-- [x] Should be possible get the logged user's profile;
-- [x] Should be possible get the check-ins number done by the logged user;
-- [x] Should be possible the user get him check-ins history;
-- [x] Should be possible the user get the nearby gyms (until 10km);
-- [x] Should be possible the user get the gyms by the name;
-- [x] Should be possible the user do check-in in a gym;
-- [x] Should be possible validate the user's check-in;
-- [x] Should be possible register a gym;
+Este app centraliza o cadastro de academias, check-ins geolocalizados e a gestão do acesso de usuários e administradores, promovendo uma experiência simples, segura e escalável para frequentadores e gestores.
+### MVP features
 
-## RNs (Regras de negócio)
+  - Cadastro de usuário e autenticação via JWT
 
-- [x] The user shouldn't be able to register using a duplicated e-mail;
-- [x] The user shouldn't be able to do 2 check-in in the same day;
-- [x] The user shouldn't be able to check-in if he isn't nearby (100m) of the gym;
-- [x] The check-in only can be validated up to 20 minutes after created;
-- [x] The check-in only can be validated by administrators;
-- [x] The gym only can be registered by administrators                                                  
+  - Consulta ao perfil e histórico de check-ins
 
-## RNFs (Requisitos não funcionais)
+  - Registro e busca de academias
 
-- [x] The user's password must be cryptographed;
-- [x] The application data must be persisted on a PostgreSQL database;
-- [x] Every data list must be paginated with 20 itens per page;
-- [x] The user must be identified by a JWT (Json Web Token);
+  - Check-in geolocalizado (com restrições de distância)
+
+  - Validação de check-in apenas por administradores
+
+  - Paginação de resultados de listas
+
+  - Proteção de rotas para diferentes perfis de usuário (admin/comum)
+
+  - Persistência dos dados com PostgreSQL
+
+### Tech stack
+
+    Backend: Node.js, TypeScript, Express
+
+    Banco de dados: PostgreSQL
+
+    ORM: Prisma
+
+    Autenticação: JWT (Json Web Token)
+
+    Testes: [Vitest, Supertest]
+
+    CI/CD: [GitHub Actions]
+
+### Setup steps
+
+Em breve esta seção será atualizada com detalhes!
+
+```bash
+# Instale as dependências
+npm install
+
+# Crie o banco e rode as migrações
+npx prisma migrate dev
+
+# Suba o serviço do PostgreSQL no Docker
+docker compose up
+
+# Execute a aplicação
+npm run dev
+```
+
+Configure as variáveis de ambiente no .env seguindo o modelo .env.example.
+### CI e Qualidade de Projeto
+
+Este projeto conta com integração contínua automatizada (CI):
+
+    Testes unitários são executados a cada push para garantir a qualidade do código.
+
+    Testes End to End (E2E) rodam automaticamente em cada pull request, validando o funcionamento completo da aplicação antes do merge.
+
+### Funcionalidades
+Requisitos funcionais
+
+  -  Cadastro, autenticação e perfil de usuário
+
+  -  Consulta e histórico de check-ins
+
+  -  Consultar academias próximas e por nome
+
+  -  Realizar e validar check-ins
+
+  -  Cadastro de academias (apenas admin)
+
+Regras de negócio
+
+  -  Cadastro impossibilitado com e-mail duplicado
+  -  Usuário não pode realizar dois check-ins no mesmo dia
+  -  Check-in só é permitido se o usuário estiver próximo da academia (até 100m)
+  -  Validação de check-in limitada a até 20 minutos após criação
+  -  Apenas administradores validam check-ins e cadastram academia
+
+Requisitos não-funcionais
+
+  -  Senha de usuário criptografada
+
+  -  Dados persistidos em PostgreSQL
+
+  -  Listagens paginadas (20 itens por página)
+
+  -  Usuários autenticados por JWT
